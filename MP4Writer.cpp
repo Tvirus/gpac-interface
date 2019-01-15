@@ -381,6 +381,8 @@ s32 MP4Writer::Write265Sample(u8 *pData, u32 Size, u64 TimeStamp)
             {
                 if (ptHEVCState)
                     gf_free(ptHEVCState);
+
+                *((u32 *)pData) = htonl(1); /* 恢复0x00000001的头 */
                 return -1;
             }
 
