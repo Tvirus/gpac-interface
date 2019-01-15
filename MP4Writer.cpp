@@ -383,6 +383,8 @@ s32 MP4Writer::Write265Sample(u8 *pData, u32 Size, u64 TimeStamp)
                     gf_free(ptHEVCState);
                 return -1;
             }
+
+            *((u32 *)pData) = htonl(1); /* 恢复0x00000001的头 */
         }
         /* 配置未完成时只处理vps sps pps头 */
         else if (CONFIG_STATUS == m_Video265Statue)
